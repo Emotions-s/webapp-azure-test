@@ -4,12 +4,11 @@ const { google } = require("googleapis");
 const app = express();
 
 const PORT = process.env.PORT || 3000;
-
-app.listen(PORT, () => {
-    console.log(`server is running on port ${PORT}`)
-});
+app.listen(PORT, () => console.log(`sever running on port ${PORT}`));
 
 app.set("view engine", "ejs");
+app.use('/css', express.static(__dirname + '/public/css'))
+
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
@@ -33,19 +32,6 @@ app.post("/", async (req, res) => {
 
     const spreadsheetId = "130pNn28WzNOmbr9nSMxAMfPalnngC0xdkJKaX78cwNM";
 
-    const metaData = await googleSheet.spreadsheets.get({
-        auth,
-        spreadsheetId,
-
-    });
-
-    const getRows = await googleSheet.spreadsheets.values.get({
-        auth,
-        spreadsheetId,
-        range: "sheet1",
-
-    });
-
     await googleSheet.spreadsheets.values.append({
         auth,
         spreadsheetId,
@@ -53,13 +39,11 @@ app.post("/", async (req, res) => {
         valueInputOption: "USER_ENTERED",
         resource: {
             values: [
-                [ request, name],
+                [name, request],
             ],
         }
     })
 
-    res.redirect("https://docs.google.com/spreadsheets/d/130pNn28WzNOmbr9nSMxAMfPalnngC0xdkJKaX78cwNM/edit?usp=sharing");
+    res.redirect("/");
 
 });
-
-app.listen(1337, (req, res) => console.log("running on 1337"));
