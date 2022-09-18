@@ -42,9 +42,11 @@ input, textarea {
     padding: 5px;
     box-shadow: 1px 1px 2px rgb(0, 132, 255);
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
+    border: none;
 }
 
-button, a{
+button, a {
     padding: 10px;
     border: none;
     margin-left: auto;
@@ -54,7 +56,9 @@ button, a{
 
 button {
     padding: 15px;
-    color: rgb(0, 132, 255);
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
 }
 
 button:hover {
